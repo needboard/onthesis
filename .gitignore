@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.opencode/node_modules
+.opencode/skill
+.opencode/package.**
+plan.md
+Notes.md
+session.md
