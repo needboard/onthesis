@@ -4,48 +4,53 @@ import { InView } from '@/components/ui/in-view';
 import { TextEffect } from '@/components/ui/text-effect';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { landingPageCopy } from '@/copy/landingpage';
+import { StackSection } from '@/components/ui/StackSection';
 
 export function Features() {
   const { features } = landingPageCopy;
 
   return (
-    <section className="py-20 md:py-28 px-6">
-      <div className="max-w-6xl mx-auto">
-        <InView triggerOnce>
-          <div className="mb-12 text-center max-w-2xl mx-auto">
-            <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
-              {features.eyebrow}
-            </p>
-            <h2 className="mb-4 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
-              <TextEffect as="span" per="line" preset="fade-in-blur" className="block" motionDelay="0ms">
-                {features.headline}
-              </TextEffect>
-            </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              {features.subheadline}
-            </p>
-          </div>
-        </InView>
+    <StackSection index={4} zIndex={50}>
+      <section className="h-[100dvh] w-full flex flex-col justify-center">
+        <div className="max-w-6xl mx-auto w-full px-6">
+          <InView triggerOnce>
+            <div className="mb-12 text-center max-w-2xl mx-auto">
+              <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
+                {features.eyebrow}
+              </p>
+              <h2 className="mb-4 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
+                <TextEffect as="span" per="line" preset="fade-in-blur" className="block" motionDelay="0ms">
+                  {features.headline}
+                </TextEffect>
+              </h2>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                {features.subheadline}
+              </p>
+            </div>
+          </InView>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-[1fr]">
-          {features.features.map((feature) => (
-            <InView key={feature.title} triggerOnce className="h-full">
-              <Card className="group h-full">
-                <CardHeader className="pb-2">
-                  <CardTitle className="font-display text-lg font-semibold text-card-foreground group-hover:text-accent transition-colors">
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pb-0">
-                  <p className="leading-relaxed text-card-foreground/90">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </InView>
-          ))}
+          <InView triggerOnce>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-[1fr]">
+              {features.features.map((feature) => (
+                <InView key={feature.title} triggerOnce className="h-full">
+                  <Card className="group h-full">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="font-display text-lg font-semibold text-card-foreground group-hover:text-accent transition-colors">
+                        {feature.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pb-0">
+                      <p className="leading-relaxed text-card-foreground/90">
+                        {feature.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </InView>
+              ))}
+            </div>
+          </InView>
         </div>
-      </div>
-    </section>
+      </section>
+    </StackSection>
   );
 }

@@ -18,7 +18,7 @@ export function InView({
   as: Component = 'div',
 }: InViewProps) {
   const ref = useRef<HTMLElement>(null);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(true);
 
   useEffect(() => {
     const element = ref.current;

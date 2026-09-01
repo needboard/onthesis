@@ -7,7 +7,7 @@ interface StackContextType {
   scrollY: MotionValue<number>;
   sectionHeight: number;
   totalSections: number;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const StackContext = createContext<StackContextType | null>(null);
@@ -23,7 +23,7 @@ export function StackProvider({
   scrollY: MotionValue<number>;
   sectionHeight: number;
   totalSections: number;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <StackContext.Provider value={{ scrollY, sectionHeight, totalSections, containerRef }}>

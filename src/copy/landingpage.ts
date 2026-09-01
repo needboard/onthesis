@@ -34,14 +34,17 @@ export interface HeroCopy {
   illustrationAlt: string;
 }
 
+export interface ProblemStat {
+  value: string;
+  label: string;
+}
+
 export interface ProblemCopy {
   eyebrow: string;
   headline: string;
   body: string[];
-  stat: {
-    value: string;
-    label: string;
-  };
+  stat: ProblemStat;
+  supportingStats: ProblemStat[];
   illustrationAlt: string;
 }
 
@@ -162,14 +165,23 @@ export const landingPageCopy: LandingPageCopy = {
     eyebrow: "The part nobody puts in the pitch deck",
     headline: "Somewhere between the portfolio call and the diligence doc, the inbox is still sitting there.",
     body: [
-      "You know most of what's in it before you open it — wrong stage, wrong check size, a sector you don't touch. But knowing that doesn't save you the scan. You still have to open it to be sure.",
-      "There's no one else it can wait for. No associate doing the first pass while you're in a board meeting. No principal filtering before it reaches you. Whatever's in there is yours — on top of sourcing, on top of diligence, on top of the actual job of investing.",
-      "So it gets triaged at 11pm, or between calls, or not at all for three days — and somewhere in that pile is the one pitch that was actually worth your time. You just don't know which one until you've already spent it.",
+      "You know most of what's in it before you open it — wrong stage, wrong check size, a sector you don't touch. Roughly 70 out of every 100 pitches die in that first look, before anyone takes a meeting. Never a judgment call about the company. A mismatch you could've caught in a sentence.",
+      "There's no associate doing that first pass, no principal filtering before it reaches you. A solo GP fielding even a modest run of cold pitches a week is looking at somewhere north of two thousand a year — thirty honest seconds each, several hundred hours spent finding the two or three that were ever going anywhere. Triaged at 11pm, between calls, or not at all for three days. You just don't know which one was worth it until you've already spent the time.",
     ],
     stat: {
-      value: "~100:1",
-      label: "deals reviewed per investment made — alone, that's every single one",
+      value: "~70%",
+      label: "of pitches die in the first look, before any meeting — a mismatch, not a rejection",
     },
+    supportingStats: [
+      {
+        value: "~2%",
+        label: "median close rate across a full year of deal flow at a typical fund",
+      },
+      {
+        value: "3-5x",
+        label: "better conversion for a warm intro than a cold pitch, meeting for meeting",
+      },
+    ],
     illustrationAlt:
       "A quiet, architectural rendering of an inbox holding more than one person can carry",
   },
@@ -261,7 +273,7 @@ export const landingPageCopy: LandingPageCopy = {
       {
         title: "Solo GPs",
         description:
-          "You're running LP capital with no associate to take the first pass. Every missed deal is underperformance you have to explain, not just a shrug. OnThesis gives you the screening layer a bigger fund gets for free — without giving up the autonomy you built this to have.",
+          "You're running LP capital with no associate to take the first pass. You already know warm intros close several times better than cold ones — that instinct is correct, and it's exactly what a bigger fund's screening layer protects at scale. OnThesis gives you that same protection without giving up the autonomy you built this to have.",
       },
       {
         title: "Angel investors",
@@ -310,6 +322,11 @@ export const landingPageCopy: LandingPageCopy = {
         answer:
           "Pricing isn't final while we're still in early access. Waitlist members get first access and founding pricing before any public rate is set.",
       },
+      {
+        question: "Why not just ignore cold email entirely?",
+        answer:
+          "Because the odds are long, not zero. Warm intros convert several times better and should stay your primary channel — but real deals still start cold, often enough that the most successful investors keep reading them anyway. OnThesis isn't built to close the channel. It's built so scanning it doesn't cost you the hours it currently does.",
+      },
     ],
   },
 
@@ -339,7 +356,7 @@ export const landingPageCopy: LandingPageCopy = {
       { label: "Contact", href: "mailto:hello@onthesis.com" },
     ],
     socialLabel: "Follow on X",
-    socialHref: "https://x.com/onthesis",
+    socialHref: "https://x.com/manyfacess14",
     copyright: `© ${new Date().getFullYear()} OnThesis. All rights reserved.`,
   },
 

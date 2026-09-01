@@ -9,19 +9,22 @@ import { Faq } from '@/components/sections/Faq';
 import { FounderNote } from '@/components/sections/FounderNote';
 import { FinalCta } from '@/components/sections/FinalCta';
 import { Footer } from '@/components/sections/Footer';
+import { StackContainer } from '@/components/sections/StackContainer';
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Hero />
-      <Problem />
-      <WeSeeYou />
-      <HowItWorks />
-      <Features />
-      <Audience />
+      <StackContainer totalSections={6}>
+        <Hero />
+        <Problem />
+        <WeSeeYou />
+        <HowItWorks />
+        <Features />
+        <Audience />
+      </StackContainer>
       <Faq />
-      <FounderNote />
+      {/* <FounderNote /> */}
       <FinalCta />
       <Footer />
     </>

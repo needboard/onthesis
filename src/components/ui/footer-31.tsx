@@ -289,7 +289,7 @@ export function Footer31({
           >
             <div className="flex items-center gap-4">
               <a
-                href="https://x.com/onthesis"
+                href="https://x.com/manyfacess14"
                 className="transition-colors hover:text-foreground"
                 aria-label="Twitter"
                 target="_blank"
@@ -298,7 +298,7 @@ export function Footer31({
                 <TwitterIcon className="h-6 w-6 fill-current" />
               </a>
               <a
-                href="https://linkedin.com/company/onthesis"
+                href="https://linkedin.com/in/abhishek-gupta-ab377b305"
                 className="transition-colors hover:text-foreground"
                 aria-label="LinkedIn"
                 target="_blank"
