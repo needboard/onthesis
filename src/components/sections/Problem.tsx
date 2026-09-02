@@ -11,7 +11,7 @@ export function Problem() {
 
   return (
     <StackSection index={1} zIndex={20}>
-      <section className="h-[100dvh] w-full flex flex-col justify-center">
+      <section id="problem" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>
             <div className="mb-12">
@@ -26,7 +26,7 @@ export function Problem() {
 
           <InView triggerOnce>
             <div className="grid lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-5 min-w-0 max-w-md mx-auto lg:mx-0">
+              <div className="lg:col-span-5 min-w-0 max-w-[200px] md:max-w-sm lg:max-w-md mx-auto lg:mx-0">
                 <ProblemIllustration ariaLabel={problem.illustrationAlt} />
               </div>
 

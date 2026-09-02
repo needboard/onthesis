@@ -25,10 +25,12 @@ export function StackSection({ index, zIndex, children, className }: StackSectio
     sectionHeight = stack.sectionHeight;
     totalSections = stack.totalSections;
   } catch {
-    // No provider - render as simple section
+    // No provider — mobile: render as simple section with padding
     return (
-      <div className={cn('relative', className)}>
-        {children}
+      <div className={cn('relative w-full', className)}>
+        <div className="max-w-6xl mx-auto w-full px-6 py-16 md:py-20">
+          {children}
+        </div>
       </div>
     );
   }

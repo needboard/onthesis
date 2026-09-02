@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useScroll } from 'motion/react';
 import { StackProvider } from '@/components/ui/StackContext';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
@@ -18,16 +18,23 @@ export function StackContainer({
   className,
 }: StackContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sectionHeight, setSectionHeight] = useState(() => {
-    if (typeof window !== 'undefined') return window.innerHeight;
-    return 720;
-  });
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [sectionHeight, setSectionHeight] = useState(720);
 
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    setIsDesktop(mq.matches);
     setSectionHeight(window.innerHeight);
+
+    const handleMQ = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     const handleResize = () => setSectionHeight(window.innerHeight);
+
+    mq.addEventListener('change', handleMQ);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      mq.removeEventListener('change', handleMQ);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const { scrollY } = useScroll({
@@ -35,20 +42,20 @@ export function StackContainer({
     offset: ['start start', 'end end'],
   });
 
-  // Scroll snap logic
+  // Scroll snap logic (desktop only)
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isSnappingRef = useRef(false);
 
   useEffect(() => {
+    if (!isDesktop) return;
+
     const handleScroll = () => {
       if (isSnappingRef.current) return;
 
-      // Clear existing timeout
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
 
-      // Set new timeout — fires when scrolling stops (150ms debounce)
       scrollTimeoutRef.current = setTimeout(() => {
         const container = containerRef.current;
         if (!container) return;
@@ -57,37 +64,28 @@ export function StackContainer({
         const containerRect = container.getBoundingClientRect();
         const containerTop = currentScrollY + containerRect.top;
 
-        // Calculate relative scroll within the container
         const relativeScroll = currentScrollY - containerTop;
 
-        // Don't snap if we're not within the container
         if (relativeScroll < 0 || relativeScroll > sectionHeight * totalSections) return;
 
-        // If within 2px of any section boundary, don't snap (already aligned)
         const offsetInSection = relativeScroll % sectionHeight;
         if (offsetInSection < 2 || offsetInSection > sectionHeight - 2) return;
 
-        // Find the current visible section (largest sectionStart <= relativeScroll)
         const sectionIndex = Math.floor(relativeScroll / sectionHeight);
         const sectionStart = sectionIndex * sectionHeight;
 
-        // Don't snap for first section or beyond last section
         if (sectionIndex <= 0 || sectionIndex >= totalSections) return;
 
-        // Calculate how far the NEXT section has transitioned in (0 to 1)
         const progressOfNextSection = (relativeScroll - sectionStart) / sectionHeight;
 
         let targetPageScroll: number;
 
         if (progressOfNextSection < 0.25) {
-          // Less than 25% into next section → snap back to current section start
           targetPageScroll = containerTop + sectionStart;
         } else {
-          // 25% or more into next section → snap forward to next section start
           targetPageScroll = containerTop + sectionStart + sectionHeight;
         }
 
-        // Only snap if we're not already at the target
         if (Math.abs(currentScrollY - targetPageScroll) < 2) return;
 
         isSnappingRef.current = true;
@@ -103,8 +101,14 @@ export function StackContainer({
       window.removeEventListener('scroll', handleScroll);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
-  }, [sectionHeight, totalSections]);
+  }, [isDesktop, sectionHeight, totalSections]);
 
+  // Mobile: plain scrolling, no stacking
+  if (!isDesktop) {
+    return <div className={cn('relative', className)}>{children}</div>;
+  }
+
+  // Desktop: full stacking behavior
   return (
     <StackProvider
       scrollY={scrollY}
@@ -114,6 +118,7 @@ export function StackContainer({
     >
       <ScrollProgress />
       <div
+        id="stack-container"
         ref={containerRef}
         className={cn('relative', className)}
         style={{ height: `${totalSections * 100}dvh` }}

@@ -10,7 +10,7 @@ export function FinalCta() {
   const { finalCta, form } = landingPageCopy;
 
   return (
-    <section className="py-20 md:py-28 px-6 bg-card/30">
+    <section id="final-cta" className="py-20 md:py-28 px-6 bg-card/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-3xl mx-auto">
           <InView triggerOnce>

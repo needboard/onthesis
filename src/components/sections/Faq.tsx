@@ -9,7 +9,7 @@ export function Faq() {
   const { faq } = landingPageCopy;
 
   return (
-    <section className="py-20 md:py-28 px-6">
+    <section id="faq" className="py-20 md:py-28 px-6">
       <div className="max-w-3xl mx-auto">
         <InView triggerOnce>
           <div className="mb-12 text-center">

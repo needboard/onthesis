@@ -11,7 +11,7 @@ export function WeSeeYou() {
 
   return (
     <StackSection index={2} zIndex={30}>
-      <section className="h-[100dvh] w-full flex flex-col justify-center">
+      <section id="we-see-you" className="w-full">
         <div className="max-w-3xl mx-auto text-center w-full px-6">
           <InView triggerOnce>
             <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">

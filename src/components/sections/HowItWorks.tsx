@@ -11,7 +11,7 @@ export function HowItWorks() {
 
   return (
     <StackSection index={3} zIndex={40}>
-      <section className="h-[100dvh] w-full flex flex-col justify-center">
+      <section id="how-it-works" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>
             <div className="mb-16 text-center max-w-2xl mx-auto">

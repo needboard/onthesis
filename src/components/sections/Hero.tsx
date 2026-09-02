@@ -4,13 +4,14 @@ import { InView } from '@/components/ui/in-view';
 import { HeroIllustration } from '@/components/illustrations/HeroIllustration';
 import { landingPageCopy } from '@/copy/landingpage';
 import { StackSection } from '@/components/ui/StackSection';
+import { scrollToElement } from '@/lib/scroll-to-section';
 
 export function Hero() {
   const { hero } = landingPageCopy;
 
   return (
     <StackSection index={0} zIndex={10}>
-      <div className="text-center max-w-4xl mx-auto">
+      <div id="hero" className="text-center max-w-4xl mx-auto">
         <InView triggerOnce>
           <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-slate-500 dark:text-slate-500">
             {hero.eyebrow}
@@ -35,13 +36,21 @@ export function Hero() {
         </InView>
 
         <InView triggerOnce>
-          <div className="mb-8 max-w-sm mx-auto" aria-hidden="true">
+            <div className="mb-8 max-w-[200px] md:max-w-sm mx-auto" aria-hidden="true">
             <HeroIllustration ariaLabel={hero.illustrationAlt} />
           </div>
         </InView>
 
         <InView triggerOnce>
-          <p className="text-sm text-slate-500 dark:text-slate-500">{hero.ctaHelperText}</p>
+          <div className="flex flex-col items-center gap-4">
+            <button
+              onClick={() => scrollToElement('final-cta')}
+              className="rounded-full border border-border bg-background px-6 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Add me to waitlist
+            </button>
+            <p className="text-sm text-slate-500 dark:text-slate-500">{hero.ctaHelperText}</p>
+          </div>
         </InView>
       </div>
     </StackSection>
