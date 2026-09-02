@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, FormEvent } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -197,6 +198,86 @@ function RightShape({
   );
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function FooterEmailCapture({
+  placeholder,
+  buttonText,
+}: {
+  placeholder: string;
+  buttonText: string;
+}) {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!EMAIL_REGEX.test(email)) {
+      setStatus('error');
+      setMessage("That doesn't look like a valid email.");
+      return;
+    }
+
+    setStatus('submitting');
+    setMessage('');
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || 'Something went wrong');
+
+      setStatus('success');
+      setMessage(data.message || "You're on the list. We'll reach out when a spot opens.");
+      setEmail('');
+    } catch {
+      setStatus('error');
+      setMessage('Something went wrong — try again in a moment.');
+    }
+  };
+
+  return (
+    <div className="w-full max-w-sm">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center rounded-full border border-border bg-card p-1 shadow-sm"
+      >
+        <input
+          type="email"
+          placeholder={placeholder}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={status === 'submitting' || status === 'success'}
+          className="flex-1 bg-transparent px-4 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:border-none disabled:opacity-50"
+          required
+        />
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="rounded-full bg-accent px-5 py-2 font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors disabled:opacity-50 whitespace-nowrap"
+        >
+          {status === 'submitting' ? 'Joining...' : buttonText}
+        </button>
+      </form>
+      {(status === 'success' || status === 'error') && (
+        <p
+          role="status"
+          aria-live="polite"
+          className={`mt-3 text-sm text-center ${status === 'success' ? 'text-accent' : 'text-destructive'}`}
+        >
+          {message}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function Footer31({
   heading = "You don't have to carry this part alone.",
   subtitle = "Inbox-native triage for the fund of one.",
@@ -263,23 +344,10 @@ export function Footer31({
               </p>
             </div>
 
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="w-full max-w-sm flex items-center rounded-full border border-border bg-card p-1 shadow-sm"
-            >
-              <input
-                type="email"
-                placeholder={newsletterPlaceholder}
-                className="flex-1 bg-transparent px-4 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:border-none"
-                required
-              />
-              <button
-                type="submit"
-                className="h-9 rounded-full bg-accent px-5 font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors"
-              >
-                {newsletterButtonText}
-              </button>
-            </form>
+            <FooterEmailCapture
+              placeholder={newsletterPlaceholder}
+              buttonText={newsletterButtonText}
+            />
           </motion.div>
 
           {/* LEFT COLUMN - Second on mobile (order-2), first on desktop (order-1) */}
