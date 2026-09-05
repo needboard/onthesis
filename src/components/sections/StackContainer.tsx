@@ -22,20 +22,41 @@ export function StackContainer({
   const [sectionHeight, setSectionHeight] = useState(720);
 
   useEffect(() => {
+    const getHeaderH = () => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+      const n = parseInt(v, 10);
+      if (!isNaN(n) && n > 0) return n;
+      const el = document.querySelector('header');
+      return el ? Math.round(el.getBoundingClientRect().height) : 64;
+    };
+
     const mq = window.matchMedia('(min-width: 1024px)');
     setIsDesktop(mq.matches);
-    setSectionHeight(window.innerHeight);
+    setSectionHeight(window.innerHeight - (mq.matches ? getHeaderH() : 0));
 
-    const handleMQ = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    const handleResize = () => setSectionHeight(window.innerHeight);
+    const handleMQ = (e: MediaQueryListEvent) => {
+      setIsDesktop(e.matches);
+      setSectionHeight(window.innerHeight - (e.matches ? getHeaderH() : 0));
+    };
+    const handleResize = () => setSectionHeight(window.innerHeight - (isDesktop ? getHeaderH() : 0));
 
     mq.addEventListener('change', handleMQ);
     window.addEventListener('resize', handleResize);
+    // header height may change via ResizeObserver in Header.tsx (updates --header-height)
+    const ro = new ResizeObserver(() => {
+      if (isDesktop) setSectionHeight(window.innerHeight - getHeaderH());
+    });
+    const headerEl = document.querySelector('header');
+    if (headerEl) ro.observe(headerEl);
+    window.visualViewport?.addEventListener('resize', handleResize);
+
     return () => {
       mq.removeEventListener('change', handleMQ);
       window.removeEventListener('resize', handleResize);
+      window.visualViewport?.removeEventListener('resize', handleResize);
+      ro.disconnect();
     };
-  }, []);
+  }, [isDesktop]);
 
   const { scrollY } = useScroll({
     target: containerRef,
@@ -74,13 +95,13 @@ export function StackContainer({
         const sectionIndex = Math.floor(relativeScroll / sectionHeight);
         const sectionStart = sectionIndex * sectionHeight;
 
-        if (sectionIndex <= 0 || sectionIndex >= totalSections) return;
+        if (sectionIndex < 0 || sectionIndex >= totalSections) return;
 
         const progressOfNextSection = (relativeScroll - sectionStart) / sectionHeight;
 
         let targetPageScroll: number;
 
-        if (progressOfNextSection < 0.25) {
+        if (progressOfNextSection < 0.3) {
           targetPageScroll = containerTop + sectionStart;
         } else {
           targetPageScroll = containerTop + sectionStart + sectionHeight;
@@ -121,7 +142,7 @@ export function StackContainer({
         id="stack-container"
         ref={containerRef}
         className={cn('relative', className)}
-        style={{ height: `${totalSections * 100}dvh` }}
+        style={{ height: `${totalSections * sectionHeight}px` }}
       >
         {children}
       </div>

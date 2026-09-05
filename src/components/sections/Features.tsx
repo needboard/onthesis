@@ -14,11 +14,11 @@ export function Features() {
       <section id="features" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>
-            <div className="mb-12 text-center max-w-2xl mx-auto">
-              <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
+            <div className="mb-4 text-center max-w-2xl mx-auto">
+              <p className="mb-2 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
                 {features.eyebrow}
               </p>
-              <h2 className="mb-4 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
+              <h2 className="mb-2 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
                 <TextEffect as="span" per="line" preset="fade-in-blur" className="block" motionDelay="0ms">
                   {features.headline}
                 </TextEffect>
@@ -30,7 +30,7 @@ export function Features() {
           </InView>
 
           <InView triggerOnce>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-[1fr]">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-[1fr]">
               {features.features.map((feature) => (
                 <InView key={feature.title} triggerOnce className="h-full">
                   <Card className="group h-full">

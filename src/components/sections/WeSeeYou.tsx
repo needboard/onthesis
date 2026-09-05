@@ -20,7 +20,7 @@ export function WeSeeYou() {
           </InView>
 
           <InView triggerOnce>
-            <h2 className="mb-10 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
+            <h2 className="mb-6 font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
               <TextEffect as="span" per="line" preset="fade-in-blur" className="block" motionDelay="0ms">
                 {weSeeYou.headline}
               </TextEffect>
@@ -28,7 +28,7 @@ export function WeSeeYou() {
           </InView>
 
           <InView triggerOnce>
-            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto">
+            <div className="space-y-4 text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto">
               {weSeeYou.body.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
@@ -36,7 +36,7 @@ export function WeSeeYou() {
           </InView>
 
           <InView triggerOnce>
-            <Separator className="my-12 mx-auto max-w-xs" />
+            <Separator className="my-8 mx-auto max-w-xs" />
           </InView>
         </div>
       </section>

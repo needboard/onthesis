@@ -13,13 +13,17 @@ export function Hero() {
     <StackSection index={0} zIndex={10}>
       <div id="hero" className="text-center max-w-4xl mx-auto">
         <InView triggerOnce>
-          <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-slate-500 dark:text-slate-500">
+          <p className="mb-2 inline-flex items-center justify-center gap-2.5 text-sm font-mono font-medium uppercase tracking-wider text-slate-500 dark:text-slate-500">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            </span>
             {hero.eyebrow}
           </p>
         </InView>
 
         <InView triggerOnce>
-          <h1 className="mb-6 font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-slate-900">
+          <h1 className="mb-4 font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-slate-900">
             <span className="block animate-blur-sm-in">
               {hero.headlineLines[0]}
             </span>
@@ -30,13 +34,13 @@ export function Hero() {
         </InView>
 
         <InView triggerOnce>
-          <p className="mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-slate-500 dark:text-slate-500">
+          <p className="mb-4 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-slate-500 dark:text-slate-500">
             {hero.subheadline}
           </p>
         </InView>
 
         <InView triggerOnce>
-            <div className="mb-8 max-w-[200px] md:max-w-sm mx-auto" aria-hidden="true">
+            <div className="mb-3 max-w-[180px] md:max-w-[280px] mx-auto" aria-hidden="true">
             <HeroIllustration ariaLabel={hero.illustrationAlt} />
           </div>
         </InView>

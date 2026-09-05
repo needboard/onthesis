@@ -14,8 +14,8 @@ export function HowItWorks() {
       <section id="how-it-works" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>
-            <div className="mb-16 text-center max-w-2xl mx-auto">
-              <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
+            <div className="mb-8 text-center max-w-2xl mx-auto">
+              <p className="mb-2 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
                 {howItWorks.eyebrow}
               </p>
               <h2 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
