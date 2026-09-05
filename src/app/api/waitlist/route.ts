@@ -4,7 +4,7 @@ import { submitToWaitlist } from '@/lib/waitlist';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email } = body;
+    const { email, crm } = body;
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
@@ -21,7 +21,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await submitToWaitlist(email);
+    if (crm !== undefined && crm !== null && typeof crm !== 'string') {
+      return NextResponse.json(
+        { success: false, message: 'Invalid CRM value.' },
+        { status: 400 }
+      );
+    }
+    const sanitizedCrm =
+      typeof crm === 'string' ? crm.trim().slice(0, 80).replace(/[<>]/g, '') : undefined;
+    if (sanitizedCrm && sanitizedCrm.length > 80) {
+      return NextResponse.json(
+        { success: false, message: 'CRM value too long.' },
+        { status: 400 }
+      );
+    }
+
+    const result = await submitToWaitlist(email, sanitizedCrm || undefined);
 
     if (!result.success) {
       return NextResponse.json(

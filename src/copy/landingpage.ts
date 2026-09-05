@@ -78,6 +78,23 @@ export interface FeaturesCopy {
   features: Feature[];
 }
 
+export interface Integration {
+  title: string;
+  description: string;
+  status: "coming-first" | "coming-later";
+  priority?: string;
+  logo: { src: string; alt: string };
+}
+
+export interface IntegrationsCopy {
+  eyebrow: string;
+  headline: string;
+  subheadline: string;
+  integrations: Integration[];
+  ctaText: string;
+  ctaHref: string;
+}
+
 export interface AudienceCopy {
   eyebrow: string;
   headline: string;
@@ -109,6 +126,9 @@ export interface FinalCtaCopy {
   subheadline: string;
   ctaPlaceholder: string;
   ctaButton: string;
+  crmPlaceholder: string;
+  crmOtherPlaceholder: string;
+  crmLabel: string;
 }
 
 export interface FooterCopy {
@@ -130,6 +150,7 @@ export interface LandingPageCopy {
   weSeeYou: WeSeeYouCopy;
   howItWorks: HowItWorksCopy;
   features: FeaturesCopy;
+  integrations: IntegrationsCopy;
   audience: AudienceCopy;
   faq: FaqCopy;
   founderNote: FounderNoteCopy;
@@ -139,6 +160,7 @@ export interface LandingPageCopy {
     successMessage: string;
     errorMessage: string;
     invalidEmailMessage: string;
+    crmHelperText: string;
   };
 }
 
@@ -266,6 +288,44 @@ export const landingPageCopy: LandingPageCopy = {
     ],
   },
 
+  integrations: {
+    eyebrow: "Works with the tools you already use",
+    headline: "Sits upstream of your CRM. Hands off only what's worth logging.",
+    subheadline:
+      "OnThesis doesn't replace Affinity, Attio, Decile Hub, or Streak. It sits in front of them, sending only the thesis-matched deals that clear the bar — so your CRM stays clean and your workflow stays yours.",
+    integrations: [
+      {
+        title: "Decile Hub",
+        description: "Push deals straight into your existing pipeline. The best match for emerging managers and solo GPs.",
+        status: "coming-first",
+        priority: "Priority 1",
+        logo: { src: "/logos/decile-hub.png", alt: "Decile Hub logo" },
+      },
+      {
+        title: "Attio",
+        description: "Works seamlessly with modern deal workflows. Built for tech-forward fund managers.",
+        status: "coming-first",
+        priority: "Priority 2",
+        logo: { src: "/logos/attio.svg", alt: "Attio logo" },
+      },
+      {
+        title: "Streak",
+        description: "For teams living in Gmail. OnThesis hands off clean deals straight to your Streak pipeline.",
+        status: "coming-first",
+        priority: "Priority 3",
+        logo: { src: "/logos/streak.png", alt: "Streak logo" },
+      },
+      {
+        title: "Affinity",
+        description: "Enterprise-grade portfolio tracking. We're building this to meet demand from larger GPs.",
+        status: "coming-later",
+        logo: { src: "/logos/affinity.png", alt: "Affinity logo" },
+      },
+    ],
+    ctaText: "Don't see your CRM? Let us know",
+    ctaHref: "#final-cta",
+  },
+
   audience: {
     eyebrow: "Who this is for",
     headline: "Built for the fund of one",
@@ -345,6 +405,9 @@ export const landingPageCopy: LandingPageCopy = {
     subheadline: "Let something else take the first pass.",
     ctaPlaceholder: "partner@yourfund.com",
     ctaButton: "Join the waitlist",
+    crmPlaceholder: "What CRM do you use? (optional)",
+    crmOtherPlaceholder: "Your CRM — e.g. Notion, Copper, HubSpot",
+    crmLabel: "What CRM do you use?",
   },
 
   footer: {
@@ -353,7 +416,7 @@ export const landingPageCopy: LandingPageCopy = {
     links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
-      { label: "Contact", href: "mailto:hello@onthesis.com" },
+      { label: "Contact", href: "mailto:agblion9@gmail.com" },
     ],
     socialLabel: "Follow on X",
     socialHref: "https://x.com/manyfacess14",
@@ -364,6 +427,7 @@ export const landingPageCopy: LandingPageCopy = {
     successMessage: "You're on the list. We'll reach out when a spot opens.",
     errorMessage: "Something went wrong — try again in a moment.",
     invalidEmailMessage: "That doesn't look like a valid email.",
+    crmHelperText: "Optional — helps us prioritize your stack.",
   },
 };
 

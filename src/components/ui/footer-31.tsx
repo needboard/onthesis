@@ -344,10 +344,7 @@ export function Footer31({
               </p>
             </div>
 
-            <FooterEmailCapture
-              placeholder={newsletterPlaceholder}
-              buttonText={newsletterButtonText}
-            />
+            {/* Footer email capture hidden — waitlist capture lives in FinalCta only */}
           </motion.div>
 
           {/* LEFT COLUMN - Second on mobile (order-2), first on desktop (order-1) */}

@@ -10,7 +10,7 @@ export function Audience() {
   const { audience } = landingPageCopy;
 
   return (
-    <StackSection index={5} zIndex={60}>
+    <StackSection index={6} zIndex={70}>
       <section id="audience" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>

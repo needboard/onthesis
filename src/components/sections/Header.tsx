@@ -9,7 +9,8 @@ import { scrollToStackSection, scrollToElement } from '@/lib/scroll-to-section';
 const navItems = [
   { label: 'How It Works', action: () => scrollToStackSection(3) },
   { label: 'Features', action: () => scrollToStackSection(4) },
-  { label: "Who It's For", action: () => scrollToStackSection(5) },
+  { label: 'Integrations', action: () => scrollToStackSection(5) },
+  { label: "Who It's For", action: () => scrollToStackSection(6) },
   { label: 'FAQ', action: () => scrollToElement('faq') },
 ];
 
@@ -97,7 +98,7 @@ export function Header() {
       style={{ borderColor: 'var(--color-border)' }}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-        <Link href="/" className="font-display text-xl font-semibold text-foreground shrink-0">
+        <Link href="/" className="font-display text-xl font-semibold text-foreground shrink-0 cursor-pointer">
           OnThesis
         </Link>
 
@@ -105,7 +106,7 @@ export function Header() {
         <button
           ref={hamburgerRef}
           onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden p-2 -mr-2"
+          className="lg:hidden p-2 -mr-2 cursor-pointer"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
@@ -118,14 +119,14 @@ export function Header() {
             <button
               key={item.label}
               onClick={item.action}
-              className="whitespace-nowrap text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="whitespace-nowrap text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
             >
               {item.label}
             </button>
           ))}
           <button
             onClick={() => scrollToElement('final-cta')}
-            className="whitespace-nowrap rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors"
+            className="whitespace-nowrap rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors cursor-pointer"
           >
             Join Waitlist
           </button>
@@ -156,7 +157,7 @@ export function Header() {
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item.action)}
-                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-1"
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-1 cursor-pointer"
                 >
                   {item.label}
                 </button>
@@ -164,7 +165,7 @@ export function Header() {
               <div className="border-t border-border pt-4 mt-1">
                 <button
                   onClick={() => handleNavClick(() => scrollToElement('final-cta'))}
-                  className="w-full rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors"
+                  className="w-full rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground shadow-sm hover:bg-accent-hover transition-colors cursor-pointer"
                 >
                   Join Waitlist
                 </button>
