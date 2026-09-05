@@ -5,6 +5,7 @@ import { TextEffect } from '@/components/ui/text-effect';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { landingPageCopy } from '@/copy/landingpage';
 import { StackSection } from '@/components/ui/StackSection';
+import { scrollToElement } from '@/lib/scroll-to-section';
 
 export function Integrations() {
   const { integrations } = landingPageCopy;
@@ -81,13 +82,19 @@ export function Integrations() {
 
           <InView triggerOnce>
             <div className="mt-4 text-center">
-              <a
-                href={integrations.ctaHref}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              <button
+                onClick={() => {
+                  if (integrations.ctaHref.startsWith('#')) {
+                    scrollToElement(integrations.ctaHref.slice(1));
+                  } else {
+                    window.location.href = integrations.ctaHref;
+                  }
+                }}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               >
                 {integrations.ctaText}
                 <span aria-hidden="true">→</span>
-              </a>
+              </button>
             </div>
           </InView>
         </div>

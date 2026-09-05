@@ -49,7 +49,7 @@ export function Hero() {
           <div className="flex flex-col items-center gap-4">
             <button
               onClick={() => scrollToElement('final-cta')}
-              className="rounded-full border border-border bg-background px-6 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+              className="rounded-full border border-border bg-background px-6 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
             >
               Add me to waitlist
             </button>

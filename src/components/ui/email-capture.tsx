@@ -103,7 +103,7 @@ export function EmailCapture({
             }}
             disabled={status === 'submitting' || status === 'success'}
             aria-label="What CRM do you use"
-            className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:opacity-50 md:text-sm"
+            className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:opacity-50 md:text-sm cursor-pointer"
           >
             <option value="">{crmPlaceholder}</option>
             <option value="Decile Hub">Decile Hub</option>

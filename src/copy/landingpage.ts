@@ -323,7 +323,7 @@ export const landingPageCopy: LandingPageCopy = {
       },
     ],
     ctaText: "Don't see your CRM? Let us know",
-    ctaHref: "mailto:hello@onthesis.xyz",
+    ctaHref: "#final-cta",
   },
 
   audience: {
@@ -416,7 +416,7 @@ export const landingPageCopy: LandingPageCopy = {
     links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
-      { label: "Contact", href: "mailto:hello@onthesis.com" },
+      { label: "Contact", href: "mailto:agblion9@gmail.com" },
     ],
     socialLabel: "Follow on X",
     socialHref: "https://x.com/manyfacess14",
