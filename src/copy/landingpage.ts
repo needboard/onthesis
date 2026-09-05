@@ -126,6 +126,9 @@ export interface FinalCtaCopy {
   subheadline: string;
   ctaPlaceholder: string;
   ctaButton: string;
+  crmPlaceholder: string;
+  crmOtherPlaceholder: string;
+  crmLabel: string;
 }
 
 export interface FooterCopy {
@@ -157,6 +160,7 @@ export interface LandingPageCopy {
     successMessage: string;
     errorMessage: string;
     invalidEmailMessage: string;
+    crmHelperText: string;
   };
 }
 
@@ -401,6 +405,9 @@ export const landingPageCopy: LandingPageCopy = {
     subheadline: "Let something else take the first pass.",
     ctaPlaceholder: "partner@yourfund.com",
     ctaButton: "Join the waitlist",
+    crmPlaceholder: "What CRM do you use? (optional)",
+    crmOtherPlaceholder: "Your CRM — e.g. Notion, Copper, HubSpot",
+    crmLabel: "What CRM do you use?",
   },
 
   footer: {
@@ -420,6 +427,7 @@ export const landingPageCopy: LandingPageCopy = {
     successMessage: "You're on the list. We'll reach out when a spot opens.",
     errorMessage: "Something went wrong — try again in a moment.",
     invalidEmailMessage: "That doesn't look like a valid email.",
+    crmHelperText: "Optional — helps us prioritize your stack.",
   },
 };
 

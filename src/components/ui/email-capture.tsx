@@ -8,6 +8,10 @@ interface EmailCaptureProps {
   placeholder: string;
   buttonText: string;
   helperText?: string;
+  showCrmField?: boolean;
+  crmPlaceholder?: string;
+  crmOtherPlaceholder?: string;
+  crmHelperText?: string;
   onSuccess?: (message: string) => void;
   onError?: (message: string) => void;
 }
@@ -18,10 +22,16 @@ export function EmailCapture({
   placeholder,
   buttonText,
   helperText,
+  showCrmField = false,
+  crmPlaceholder = 'What CRM do you use? (optional)',
+  crmOtherPlaceholder = 'Your CRM — e.g. Notion, Copper, HubSpot',
+  crmHelperText,
   onSuccess,
   onError,
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
+  const [crmChoice, setCrmChoice] = useState('');
+  const [crmOther, setCrmOther] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
@@ -37,11 +47,16 @@ export function EmailCapture({
     setStatus('submitting');
     setMessage('');
 
+    const crmFinal =
+      crmChoice === '__other__' ? crmOther.trim().slice(0, 80).replace(/[<>]/g, '') : crmChoice.replace(/[<>]/g, '').slice(0, 80);
+    const payload: Record<string, string> = { email };
+    if (crmFinal) payload.crm = crmFinal;
+
     try {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -51,6 +66,8 @@ export function EmailCapture({
       setStatus('success');
       setMessage(data.message || 'You\'re on the list. We\'ll reach out when a spot opens.');
       setEmail('');
+      setCrmChoice('');
+      setCrmOther('');
       onSuccess?.(data.message || 'You\'re on the list. We\'ll reach out when a spot opens.');
     } catch {
       setStatus('error');
@@ -75,6 +92,40 @@ export function EmailCapture({
           {status === 'submitting' ? 'Joining...' : buttonText}
         </Button>
       </div>
+
+      {showCrmField && (
+        <div className="mt-3 space-y-2">
+          <select
+            value={crmChoice}
+            onChange={(e) => {
+              setCrmChoice(e.target.value);
+              if (e.target.value !== '__other__') setCrmOther('');
+            }}
+            disabled={status === 'submitting' || status === 'success'}
+            aria-label="What CRM do you use"
+            className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:opacity-50 md:text-sm"
+          >
+            <option value="">{crmPlaceholder}</option>
+            <option value="Decile Hub">Decile Hub</option>
+            <option value="Attio">Attio</option>
+            <option value="Streak">Streak</option>
+            <option value="Affinity">Affinity</option>
+            <option value="__other__">Other — tell us</option>
+          </select>
+          {crmChoice === '__other__' && (
+            <Input
+              type="text"
+              placeholder={crmOtherPlaceholder}
+              value={crmOther}
+              onChange={(e) => setCrmOther(e.target.value.slice(0, 80))}
+              disabled={status === 'submitting' || status === 'success'}
+              aria-label="Other CRM name"
+              maxLength={80}
+            />
+          )}
+          {crmHelperText && <p className="text-xs text-muted-foreground">{crmHelperText}</p>}
+        </div>
+      )}
       {(status === 'success' || status === 'error') && (
         <p
           id="email-status"

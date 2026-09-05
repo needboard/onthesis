@@ -35,6 +35,10 @@ export function FinalCta() {
               placeholder={finalCta.ctaPlaceholder}
               buttonText={finalCta.ctaButton}
               helperText={form.successMessage}
+              showCrmField
+              crmPlaceholder={finalCta.crmPlaceholder}
+              crmOtherPlaceholder={finalCta.crmOtherPlaceholder}
+              crmHelperText={form.crmHelperText}
             />
           </InView>
         </div>
