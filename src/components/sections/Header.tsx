@@ -48,16 +48,25 @@ export function Header() {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
-  // Measure header height for dropdown positioning
+  // Measure header height for dropdown positioning and section offset
   useEffect(() => {
     const measure = () => {
       if (headerRef.current) {
-        setHeaderHeight(headerRef.current.getBoundingClientRect().height);
+        const h = headerRef.current.getBoundingClientRect().height;
+        setHeaderHeight(h);
+        document.documentElement.style.setProperty('--header-height', `${h}px`);
       }
     };
     measure();
+    const ro = new ResizeObserver(measure);
+    if (headerRef.current) ro.observe(headerRef.current);
     window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
+    window.visualViewport?.addEventListener('resize', measure);
+    return () => {
+      window.removeEventListener('resize', measure);
+      window.visualViewport?.removeEventListener('resize', measure);
+      ro.disconnect();
+    };
   }, []);
 
   // Close menu on outside click
@@ -87,7 +96,7 @@ export function Header() {
       className="sticky top-0 z-[200] border-b bg-background/80 backdrop-blur-md"
       style={{ borderColor: 'var(--color-border)' }}
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
         <Link href="/" className="font-display text-xl font-semibold text-foreground shrink-0">
           OnThesis
         </Link>

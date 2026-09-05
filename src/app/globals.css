@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --header-height: 64px;
   --font-display: var(--font-source-serif-4);
   --font-body: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

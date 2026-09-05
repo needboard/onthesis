@@ -14,8 +14,8 @@ export function Problem() {
       <section id="problem" className="w-full">
         <div className="max-w-6xl mx-auto w-full px-6">
           <InView triggerOnce>
-            <div className="mb-12">
-              <p className="mb-4 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
+            <div className="mb-6">
+              <p className="mb-2 text-sm font-mono font-medium uppercase tracking-wider text-muted-foreground">
                 {problem.eyebrow}
               </p>
               <h2 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
@@ -25,18 +25,18 @@ export function Problem() {
           </InView>
 
           <InView triggerOnce>
-            <div className="grid lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-5 min-w-0 max-w-[200px] md:max-w-sm lg:max-w-md mx-auto lg:mx-0">
+            <div className="grid lg:grid-cols-12 gap-6">
+              <div className="lg:col-span-5 min-w-0 max-w-[180px] md:max-w-[240px] lg:max-w-[300px] mx-auto lg:mx-0">
                 <ProblemIllustration ariaLabel={problem.illustrationAlt} />
               </div>
 
               <div className="lg:col-span-7 min-w-0">
-                <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+                <div className="space-y-3 text-lg leading-relaxed text-muted-foreground">
                   {problem.body.map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}
                 </div>
-                <div className="mt-10 flex items-start gap-4">
+                <div className="mt-6 flex items-start gap-4">
                   <Separator
                     orientation="vertical"
                     className="h-12 w-px bg-[var(--color-thesis-bar)] shrink-0"
@@ -53,7 +53,7 @@ export function Problem() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex gap-8">
+                <div className="mt-4 flex gap-8">
                   {problem.supportingStats.map((stat, i) => (
                     <div key={i}>
                       <div className="text-2xl font-mono font-bold text-foreground">
