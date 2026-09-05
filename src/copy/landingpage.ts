@@ -78,6 +78,23 @@ export interface FeaturesCopy {
   features: Feature[];
 }
 
+export interface Integration {
+  title: string;
+  description: string;
+  status: "coming-first" | "coming-later";
+  priority?: string;
+  logo: { src: string; alt: string };
+}
+
+export interface IntegrationsCopy {
+  eyebrow: string;
+  headline: string;
+  subheadline: string;
+  integrations: Integration[];
+  ctaText: string;
+  ctaHref: string;
+}
+
 export interface AudienceCopy {
   eyebrow: string;
   headline: string;
@@ -130,6 +147,7 @@ export interface LandingPageCopy {
   weSeeYou: WeSeeYouCopy;
   howItWorks: HowItWorksCopy;
   features: FeaturesCopy;
+  integrations: IntegrationsCopy;
   audience: AudienceCopy;
   faq: FaqCopy;
   founderNote: FounderNoteCopy;
@@ -264,6 +282,44 @@ export const landingPageCopy: LandingPageCopy = {
           "A standing rollup of what got auto-passed and why, so you can spot-check the system's calls instead of trusting it blind.",
       },
     ],
+  },
+
+  integrations: {
+    eyebrow: "Works with the tools you already use",
+    headline: "Sits upstream of your CRM. Hands off only what's worth logging.",
+    subheadline:
+      "OnThesis doesn't replace Affinity, Attio, Decile Hub, or Streak. It sits in front of them, sending only the thesis-matched deals that clear the bar — so your CRM stays clean and your workflow stays yours.",
+    integrations: [
+      {
+        title: "Decile Hub",
+        description: "Push deals straight into your existing pipeline. The best match for emerging managers and solo GPs.",
+        status: "coming-first",
+        priority: "Priority 1",
+        logo: { src: "/logos/decile-hub.png", alt: "Decile Hub logo" },
+      },
+      {
+        title: "Attio",
+        description: "Works seamlessly with modern deal workflows. Built for tech-forward fund managers.",
+        status: "coming-first",
+        priority: "Priority 2",
+        logo: { src: "/logos/attio.svg", alt: "Attio logo" },
+      },
+      {
+        title: "Streak",
+        description: "For teams living in Gmail. OnThesis hands off clean deals straight to your Streak pipeline.",
+        status: "coming-first",
+        priority: "Priority 3",
+        logo: { src: "/logos/streak.png", alt: "Streak logo" },
+      },
+      {
+        title: "Affinity",
+        description: "Enterprise-grade portfolio tracking. We're building this to meet demand from larger GPs.",
+        status: "coming-later",
+        logo: { src: "/logos/affinity.png", alt: "Affinity logo" },
+      },
+    ],
+    ctaText: "Don't see your CRM? Let us know",
+    ctaHref: "mailto:hello@onthesis.xyz",
   },
 
   audience: {

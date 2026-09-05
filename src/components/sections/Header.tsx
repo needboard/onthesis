@@ -9,7 +9,8 @@ import { scrollToStackSection, scrollToElement } from '@/lib/scroll-to-section';
 const navItems = [
   { label: 'How It Works', action: () => scrollToStackSection(3) },
   { label: 'Features', action: () => scrollToStackSection(4) },
-  { label: "Who It's For", action: () => scrollToStackSection(5) },
+  { label: 'Integrations', action: () => scrollToStackSection(5) },
+  { label: "Who It's For", action: () => scrollToStackSection(6) },
   { label: 'FAQ', action: () => scrollToElement('faq') },
 ];
 

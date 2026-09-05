@@ -5,7 +5,7 @@
  * On mobile (no stacking), uses element IDs instead of calculated positions.
  */
 export function scrollToStackSection(sectionIndex: number) {
-  const sectionIds = ['hero', 'problem', 'we-see-you', 'how-it-works', 'features', 'audience'];
+  const sectionIds = ['hero', 'problem', 'we-see-you', 'how-it-works', 'features', 'integrations', 'audience'];
 
   // On mobile, sections are in normal DOM flow — use element IDs
   if (typeof window !== 'undefined' && window.innerWidth < 1024) {
